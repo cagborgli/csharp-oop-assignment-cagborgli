@@ -17,7 +17,7 @@ namespace CsharpOopAssignmentTests
         [MemberData("GenerateRational", MemberType=typeof(RationalGenerator))]
         public void ConstructorSuccess(Rational rat, int n, int d)
         {
-            Assert.Equal(rat.Numerator, n);
+            Assert.Equal(rat.numerator, n);
             Assert.Equal(rat.Denominator, d);
         }
         
@@ -25,16 +25,16 @@ namespace CsharpOopAssignmentTests
         [MemberData("GenerateRational", MemberType=typeof(RationalGenerator))]
         public void ConstructFail(Rational rat, int n, int d)
         {
-            Assert.Throws<ArgumentException>(() => rat.Construct(rat.Numerator, 0));
+            Assert.Throws<ArgumentException>(() => rat.Construct(rat.numerator, 0));
         }
         
         [Theory]
         [MemberData("GenerateRational", MemberType=typeof(RationalGenerator))]
         public void ConstructSuccess(Rational r, int n, int d)
         {
-            Rational newR = (Rational) r.Construct(r.Numerator, r.Denominator);
+            Rational newR = (Rational) r.Construct(r.numerator, r.Denominator);
             Assert.True(r != newR);
-            Assert.Equal(r.Numerator, newR.Numerator);
+            Assert.Equal(r.numerator, newR.numerator);
             Assert.Equal(r.Denominator, newR.Denominator);
         }
         
@@ -44,10 +44,10 @@ namespace CsharpOopAssignmentTests
         {
             Assert.NotNull(r1);
 
-            Rational r2 = new Rational(r1.Numerator, r1.Denominator);
+            Rational r2 = new Rational(r1.numerator, r1.Denominator);
             Assert.Equal(r1, r2);
 
-            Rational r3 = new Rational(r1.Numerator + 1, r1.Denominator);
+            Rational r3 = new Rational(r1.numerator + 1, r1.Denominator);
             Assert.NotEqual(r1, r3);
             Assert.NotEqual(r2, r3);
         }
@@ -56,7 +56,7 @@ namespace CsharpOopAssignmentTests
         [MemberData("GenerateRational", MemberType=typeof(RationalGenerator))]
         public void CheckToString(Rational r, int num, int den)
         {
-            int n = r.Numerator;
+            int n = r.numerator;
             int d = r.Denominator;
 
             Assert.Equal((n < 0 != d < 0 ? "-" : "") + Math.Abs(n) + "/" + Math.Abs(d), r.ToString());
@@ -68,7 +68,7 @@ namespace CsharpOopAssignmentTests
         {
             RationalBase result = r.Negate();
             Assert.True(r != result);
-            Assert.Equal(new Rational(-r.Numerator, r.Denominator), result);
+            Assert.Equal(new Rational(-r.numerator, r.Denominator), result);
         }
 
         [Theory]
@@ -77,7 +77,7 @@ namespace CsharpOopAssignmentTests
         {
             RationalBase result = r.Invert();
             Assert.True(r != result);
-            Assert.Equal(new Rational(r.Denominator, r.Numerator), result);
+            Assert.Equal(new Rational(r.Denominator, r.numerator), result);
         }
 
         [Theory]
@@ -100,7 +100,7 @@ namespace CsharpOopAssignmentTests
         {
             RationalBase result = r1.Add(r2);
             Assert.True(r1 != result && r2 != result);
-            int n1 = r1.Numerator, d1 = r1.Denominator, n2 = r2.Numerator, d2 = r2.Denominator;
+            int n1 = r1.numerator, d1 = r1.Denominator, n2 = r2.numerator, d2 = r2.Denominator;
             Assert.Equal(new Rational(n1 * d2 + n2 * d1, d1 * d2), result);
         }
         
@@ -117,7 +117,7 @@ namespace CsharpOopAssignmentTests
         {
             RationalBase result = r1.Sub(r2);
             Assert.True(r1 != result && r2 != result);
-            int n1 = r1.Numerator, d1 = r1.Denominator, n2 = r2.Numerator, d2 = r2.Denominator;
+            int n1 = r1.numerator, d1 = r1.Denominator, n2 = r2.numerator, d2 = r2.Denominator;
             Assert.Equal(new Rational(n1 * d2 - n2 * d1, d1 * d2), result);
         }
         
@@ -134,7 +134,7 @@ namespace CsharpOopAssignmentTests
         {
             RationalBase result = r1.Mul(r2);
             Assert.True(r1 != result && r2 != result);
-            int n1 = r1.Numerator, d1 = r1.Denominator, n2 = r2.Numerator, d2 = r2.Denominator;
+            int n1 = r1.numerator, d1 = r1.Denominator, n2 = r2.numerator, d2 = r2.Denominator;
             Assert.Equal(new Rational(n1 * n2, d1 * d2), result);
         }
         
@@ -158,7 +158,7 @@ namespace CsharpOopAssignmentTests
         {
             RationalBase result = r1.Div(r2);
             Assert.True(r1 != result && r2 != result);
-            int n1 = r1.Numerator, d1 = r1.Denominator, n2 = r2.Numerator, d2 = r2.Denominator;
+            int n1 = r1.numerator, d1 = r1.Denominator, n2 = r2.numerator, d2 = r2.Denominator;
             Assert.Equal(new Rational(n1 * d2, d1 * n2), result);
         }
     }

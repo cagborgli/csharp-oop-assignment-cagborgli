@@ -4,7 +4,9 @@ namespace CsharpOopAssignment
 {
     public class SimplifiedRational : RationalBase
     {
-        
+        public int Numerator { get; }
+        public int Denominator { get; }
+
         /**
          * Determines the greatest common denominator for the given values
          *
@@ -15,7 +17,17 @@ namespace CsharpOopAssignment
          */
         public static int Gcd(int a, int b)
         {
-	        throw new NotImplementedException();
+            int gcd=0;
+            if (a <= 0 || b < 0)
+                throw new InvalidOperationException();
+            while (a != 0 && b != 0)
+            {
+                if (a > b)
+                    a %= b;
+                else
+                    b %= a;
+            }
+            return a == 0 ? b : a;    
         }
 
         /**
@@ -32,8 +44,34 @@ namespace CsharpOopAssignment
          * @throws InvalidOperationException if the given denominator is 0
          */
         public static int[] Simplify(int numerator, int denominator)
-        {   
-	        throw new NotImplementedException();
+        {
+            if (denominator == 0)
+                throw new InvalidOperationException();
+            int[] simp = new int[2];
+            int gcd = 0;
+            try
+            {
+                gcd = Gcd(numerator, denominator);
+            }
+            catch
+            {
+                simp[0] = numerator;
+                simp[1] = denominator;
+                return simp;
+            }
+            
+            if (numerator == 0)
+            {
+                simp[0] = 0;
+                simp[1] = 1;
+            }
+            else
+            {
+                simp[0] = numerator / gcd;
+                simp[1] = denominator / gcd;
+            }
+            return simp;
+
         }
 
         /**
@@ -50,7 +88,13 @@ namespace CsharpOopAssignment
          */
         public SimplifiedRational(int numerator, int denominator) : base(numerator, denominator)
         {
-	        throw new NotImplementedException();
+            if(denominator ==0)
+	            throw new ArgumentException();
+
+            int[] s = Simplify(numerator, denominator);
+            Numerator = s[0];
+            Denominator = s[1];
+
         }
 
         /**
@@ -70,7 +114,10 @@ namespace CsharpOopAssignment
 		 */
         public override RationalBase Construct(int numerator, int denominator)
         {
-	        throw new NotImplementedException();
+           if(denominator ==0)
+	        throw new ArgumentException("Give me a different error");
+           return new SimplifiedRational(numerator, denominator);
+  
         }
 
         /**
@@ -81,7 +128,17 @@ namespace CsharpOopAssignment
          */
         public override bool Equals(object obj)
         {
-	        throw new NotImplementedException();
+            if (obj == this) return true;
+            if (obj == null) return false;
+
+            SimplifiedRational check = null;
+
+            if (obj is SimplifiedRational)
+                check = (SimplifiedRational)obj;
+    
+
+            return (check.Numerator == Numerator && check.Denominator == Denominator);
+                
         }
 
         /**
@@ -93,7 +150,12 @@ namespace CsharpOopAssignment
          */
         public override string ToString()
         {
-	        throw new NotImplementedException();
+            if(numerator<0 || Denominator<0)
+                return ($"-{numerator}/{Denominator}");
+            if (numerator < 0 && Denominator <0)
+                return ($"{numerator}/{Denominator}");
+
+            return ($"{numerator}/{Denominator}");
         }
     }
 }

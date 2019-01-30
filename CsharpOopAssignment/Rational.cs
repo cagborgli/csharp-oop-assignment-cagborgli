@@ -4,21 +4,9 @@ namespace CsharpOopAssignment
 {
     public class Rational : RationalBase
     {
-        /**
-         * Constructor for rational values of the type:
-         * <p>
-         * `numerator / denominator`
-         * <p>
-         * No simplification of the numerator/denominator pair should occur in this method.
-         *
-         * @param numerator   the numerator of the rational value
-         * @param denominator the denominator of the rational value
-         * @throws ArgumentException if the given denominator is 0
-         */
-        public Rational(int numerator, int denominator) : base(numerator, denominator)
-        {
-        }
 
+        public Rational(int numerator, int denominator) : base(numerator, denominator){}
+    
         /**
 		 * Specialized constructor to take advantage of shared code between
 		 * Rational and SimplifiedRational
@@ -36,7 +24,9 @@ namespace CsharpOopAssignment
 		 */
         public override RationalBase Construct(int numerator, int denominator)
         {
-	        throw new NotImplementedException();
+            if(denominator==0)
+                throw new ArgumentException();
+            return new Rational(numerator, denominator);
         }
 
         /**
@@ -47,7 +37,14 @@ namespace CsharpOopAssignment
          */
         public override bool Equals(object obj)
         {
-	        throw new NotImplementedException();
+
+            if (obj == this) return true;
+            if (obj == null) return false;
+            RationalBase check = null;
+            if (obj is RationalBase)
+                check = (RationalBase)obj;
+
+            return (check.numerator == numerator && check.Denominator == Denominator);
         }
 
         /**
@@ -59,7 +56,9 @@ namespace CsharpOopAssignment
          */
         public override string ToString()
         {
-	        throw new NotImplementedException();
+            if(numerator < 0)
+                return ($"-{numerator}/{Denominator}");
+            return ($"{numerator}/{Denominator}");
         }
     }
 }
