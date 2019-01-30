@@ -4,8 +4,8 @@ namespace CsharpOopAssignment
 {
     public class SimplifiedRational : RationalBase
     {
-        public int Numerator { get; }
-        public int Denominator { get; }
+        //public int Numerator { get; }
+        //public int Denominator { get; }
 
         /**
          * Determines the greatest common denominator for the given values
@@ -17,7 +17,6 @@ namespace CsharpOopAssignment
          */
         public static int Gcd(int a, int b)
         {
-            int gcd=0;
             if (a <= 0 || b < 0)
                 throw new InvalidOperationException();
             while (a != 0 && b != 0)
@@ -51,7 +50,7 @@ namespace CsharpOopAssignment
             int gcd = 0;
             try
             {
-                gcd = Gcd(numerator, denominator);
+                gcd = Gcd(Math.Abs(numerator), Math.Abs(denominator));
             }
             catch
             {
@@ -150,12 +149,12 @@ namespace CsharpOopAssignment
          */
         public override string ToString()
         {
-            if(numerator<0 || Denominator<0)
-                return ($"-{numerator}/{Denominator}");
-            if (numerator < 0 && Denominator <0)
-                return ($"{numerator}/{Denominator}");
+            //if(numerator<0 || Denominator<0)
+            //    return ($"-{numerator}/{Denominator}");
+            //if (numerator < 0 && Denominator <0)
+            //    return ($"{numerator}/{Denominator}");
 
-            return ($"{numerator}/{Denominator}");
+            return ($"{Numerator}/{Denominator}");
         }
     }
 }

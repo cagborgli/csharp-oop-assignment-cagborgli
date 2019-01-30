@@ -40,11 +40,11 @@ namespace CsharpOopAssignment
 
             if (obj == this) return true;
             if (obj == null) return false;
-            RationalBase check = null;
-            if (obj is RationalBase)
-                check = (RationalBase)obj;
+            Rational check = null;
+            if (obj is Rational)
+                check = (Rational)obj;
 
-            return (check.numerator == numerator && check.Denominator == Denominator);
+            return (check.Numerator == Numerator && check.Denominator == Denominator);
         }
 
         /**
@@ -56,9 +56,9 @@ namespace CsharpOopAssignment
          */
         public override string ToString()
         {
-            if(numerator < 0)
-                return ($"-{numerator}/{Denominator}");
-            return ($"{numerator}/{Denominator}");
+            if(Numerator < 0)
+                return ($"-{Numerator}/{Denominator}");
+            return ($"{Numerator}/{Denominator}");
         }
     }
 }
