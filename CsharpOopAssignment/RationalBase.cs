@@ -3,8 +3,7 @@ using System;
 namespace CsharpOopAssignment
 {
     public abstract class RationalBase
-    {
-	    
+    {	    
         public int Numerator { get; protected set; }
 		public int Denominator { get; protected set; }
 	    
@@ -22,7 +21,10 @@ namespace CsharpOopAssignment
 	    public RationalBase(int numerator, int denominator)
 	    {
             if (denominator == 0)
+            {
                 throw new ArgumentException();
+            }
+
             this.Numerator = numerator;
             this.Denominator = denominator;
         }
@@ -43,8 +45,6 @@ namespace CsharpOopAssignment
 		 *             if the given denominator is 0
 		 */
         public abstract RationalBase Construct(int numerator, int denominator);
-       
-       
 
         /**
          * negation of rational values
@@ -70,7 +70,10 @@ namespace CsharpOopAssignment
         public RationalBase Invert()
         {
             if (Numerator == 0)
+            {
                 throw new InvalidOperationException();
+            }
+
             return Construct(Denominator, Numerator);
         }
         /**
@@ -86,8 +89,11 @@ namespace CsharpOopAssignment
          */
         public RationalBase Add(RationalBase that)
         {
-            if(that==null)
-	            throw new InvalidOperationException();
+            if (that == null)
+            {
+                throw new InvalidOperationException();
+            }
+
             return Construct(((this.Numerator * that.Denominator) + (that.Numerator * this.Denominator)), (this.Denominator * that.Denominator));
         }
 
@@ -104,8 +110,11 @@ namespace CsharpOopAssignment
          */
         public RationalBase Sub(RationalBase that)
         {
-            if(that ==null)
-	            throw new InvalidOperationException();
+            if (that == null)
+            {
+                throw new InvalidOperationException();
+            }
+
             return Construct(((this.Numerator * that.Denominator) - (that.Numerator * this.Denominator)), (this.Denominator * that.Denominator));
         }
 
@@ -122,8 +131,11 @@ namespace CsharpOopAssignment
          */
         public RationalBase Mul(RationalBase that)
         {
-            if(that==null)
-	            throw new InvalidOperationException();
+            if (that == null)
+            {
+                throw new InvalidOperationException();
+            }
+
             return Construct((this.Numerator * that.Numerator), (this.Denominator * that.Denominator));
         }
 
@@ -140,8 +152,11 @@ namespace CsharpOopAssignment
 		 */
         public RationalBase Div(RationalBase that)
         {
-            if(that ==null || that.Numerator==0)
-	            throw new InvalidOperationException();
+            if (that == null || that.Numerator == 0)
+            {
+                throw new InvalidOperationException();
+            }
+
             return Construct((this.Numerator * that.Denominator),(this.Denominator * that.Numerator));
         }
     }

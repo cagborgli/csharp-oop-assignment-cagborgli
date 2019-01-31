@@ -4,7 +4,6 @@ namespace CsharpOopAssignment
 {
     public class Rational : RationalBase
     {
-
         public Rational(int numerator, int denominator) : base(numerator, denominator){}
     
         /**
@@ -24,8 +23,11 @@ namespace CsharpOopAssignment
 		 */
         public override RationalBase Construct(int numerator, int denominator)
         {
-            if(denominator==0)
+            if (denominator == 0)
+            {
                 throw new ArgumentException();
+            }
+
             return new Rational(numerator, denominator);
         }
 
@@ -37,12 +39,21 @@ namespace CsharpOopAssignment
          */
         public override bool Equals(object obj)
         {
+            if (obj == this)
+            {
+                return true;
+            }
+            if (obj == null)
+            {
+                return false;
+            }
 
-            if (obj == this) return true;
-            if (obj == null) return false;
             Rational check = null;
+
             if (obj is Rational)
+            {
                 check = (Rational)obj;
+            }
 
             return (check.Numerator == Numerator && check.Denominator == Denominator);
         }
@@ -56,8 +67,11 @@ namespace CsharpOopAssignment
          */
         public override string ToString()
         {
-            if(Numerator < 0)
+            if (Numerator < 0)
+            {
                 return ($"-{Numerator}/{Denominator}");
+            }
+
             return ($"{Numerator}/{Denominator}");
         }
     }
